@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+svn ls `svn info | grep URL | sed 's/URL: //' | sed 's/trunk/tags/'`
+

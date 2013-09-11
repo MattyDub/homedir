@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+
+if [[ $# -lt 2 ]];
+then
+echo "Usage: $0 <tag name> <commit message (use quotes!)>"
+echo "Should be run in the working copy's trunk directory"
+echo "Example:"
+echo $0 rel-0.9.19-b3 \"Tagging for release to production, includes changes to the frozzle module per SR 42\"
+exit
+fi
+
+SOURCE=`svn info | grep URL | cut -d: -f2- | sed 's/^ //'`
+TARGET=$1
+MESSAGE=$2
+#This does a replacement of the first instance of "trunk" with "tags/$TARGET" in the string $SOURCE
+TGT=${SOURCE/trunk/tags\/$TARGET}
+
+printf "about to run:'svn copy $SOURCE $TGT -m \"$MESSAGE\"'"
+
+svn copy $SOURCE $TGT -m \"$MESSAGE\"
