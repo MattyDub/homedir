@@ -1,1 +1,11 @@
 .bash_history
+.smex*
+.emacs.d/.emacs.desktop
+.emacs.d/backups/
+.emacs.d/desktop/
+.emacs.d/elpa/
+.emacs.d/places
+.emacs.d/saves/
+.emacs.d/themes/
+.ido.last
+.saves/
