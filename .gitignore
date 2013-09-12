@@ -9,3 +9,9 @@
 .emacs.d/themes/
 .ido.last
 .saves/
+.emacs.d/.emacs.desktop.lock
+.emacs.d/auto-save-list/
+.emacs.d/nrepl-history
+.emacs.d/server/
+.recentf
+org/
