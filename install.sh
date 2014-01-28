@@ -1,19 +1,27 @@
 #!/bin/bash -x
 
 function backup {
-   export SRC_DIR=$1
+   export SRC=$1
 
-   if [ -e $SRC_DIR ]; then
-      export AWAY_DIR=$SRC_DIR.homedir.backup
-      while [ -e $AWAY_DIR ]; do
+   if [ -e $SRC ]; then
+      export AWAY=$SRC.homedir.backup
+      while [ -e $AWAY ]; do
           export TIMESTAMP=$(date "+%Y%m%d%H%M%S")
-          export AWAY_DIR=$AWAY_DIR.$TIMESTAMP
+          export AWAY=$AWAY.$TIMESTAMP
       done
-      echo "Backing up existing $SRC_DIR to $AWAY_DIR"
-      mv $SRC_DIR $AWAY_DIR
+      echo "Backing up existing $SRC to $AWAY"
+      mv $SRC $AWAY
    fi
 }
 
-#TODO: can't have trailing slash here; can we fix that?
 backup ~/bin
 cp -r ./bin ~/bin
+
+backup ~/.emacs
+cp -r .emacs ~/.emacs
+
+backup ~/.bashrc
+cp .bashrc ~/.bashrc
+
+backup ~/.profile
+cp .profile ~/.profile
