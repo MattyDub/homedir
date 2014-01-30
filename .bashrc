@@ -11,7 +11,7 @@ alias rs="/src/test/djmsg/Scripts/python /src/test/djmsg/djmsg/manage.py runserv
 
 export M2_HOME=/apache-maven-2.2.1
 #the \e is to set up the titlebar; see https://www.ibm.com/developerworks/linux/library/l-tip-prompt/
-export PS1="\[\e]2;\w\a\e\n\[\e[33m\]\w\[\e[0m\]\n\$ "
+export PS1="\[\\e[32;1m\]\w\[\e[0m\]\n\$ "
 SVN_EDITOR=/emacs-23.4/bin/emacsclientw.exe
 export SVN_EDITOR
 PYMACS_EMACS=/emacs-22.2/bin/emacs.exe
@@ -22,5 +22,5 @@ export HISTTIMEFORMAT='%F %T '
 
 #virtualenvwrapper:
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
+export PROJECT_HOME=$HOME/src
 source /usr/local/bin/virtualenvwrapper.sh
