@@ -17,8 +17,8 @@ function backup {
 backup ~/bin
 cp -r ./bin ~/bin
 
-backup ~/.emacs
-cp -r .emacs ~/.emacs
+backup ~/.emacs.d
+cp -r .emacs.d ~/.emacs.d
 
 backup ~/.bashrc
 cp .bashrc ~/.bashrc
