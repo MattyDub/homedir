@@ -20,6 +20,9 @@ cp -r ./bin ~/bin
 backup ~/.emacs.d
 cp -r .emacs.d ~/.emacs.d
 
+backup ~/.bash_profile
+cp .bash_profile ~/.bash_profile
+
 backup ~/.bashrc
 cp .bashrc ~/.bashrc
 
