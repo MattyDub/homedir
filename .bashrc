@@ -5,7 +5,7 @@ alias lt="ls -lrt"
 export PS1="\[\\e[32;1m\]\w\[\e[0m\]\n\$ "
 SVN_EDITOR=vi
 export SVN_EDITOR
-PATH=/usr/local/bin/:/usr/bin:${PATH}:/xmlstarlet-1.2.1/:~/bin/
+PATH=/usr/local/bin:/usr/bin:${PATH}:/xmlstarlet-1.2.1:~/bin
 export PATH
 export HISTTIMEFORMAT='%F %T '
 
