@@ -128,6 +128,10 @@ by using nxml's indentation rules."
 ;(require 'recentf)
 ;(recentf-mode 1)
 
+;; rainbow delimiters
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
+
 (server-start)
 
 ;; This is on purpose:
