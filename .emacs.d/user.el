@@ -136,3 +136,21 @@ by using nxml's indentation rules."
 
 ;; This is on purpose:
 (put 'downcase-region 'disabled nil)
+
+(add-hook 'nxml-mode-hook
+          '(lambda ()
+             (auto-fill-mode -1)
+             (define-key nxml-mode-map "\C-c\C-c"
+               'nxml-complete)))
+
+(add-hook 'nxhtml-mode-hook
+          '(lambda ()
+             (auto-fill-mode -1)))
+
+;; syntax is:
+;; (add-hook <hook name> <function> <append> <local>)
+(add-hook 'emacs-lisp-mode-hook 'turn-off-auto-fill t nil)
+
+(add-hook 'python-mode-hook 'turn-off-auto-fill)
+
+(add-hook 'sql-mode-hook 'turn-off-auto-fill)
