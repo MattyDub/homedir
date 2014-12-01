@@ -4,6 +4,9 @@
 ;;;stops emacs from wrapping long lines:
 (setq default-truncate-lines t)
 
+;;; Max line length:
+(set-fill-column 100)
+
 ;; env PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
@@ -125,6 +128,50 @@ by using nxml's indentation rules."
 (add-to-list 'auto-mode-alist '("\\.pkb$" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pks$" . sql-mode))
 
+;; Workaround the annoying warnings:
+;;    Warning (mumamo-per-buffer-local-vars):
+;;    Already 'permanent-local t: buffer-file-name
+(when (and (>= emacs-major-version 24)
+           (>= emacs-minor-version 2))
+  (eval-after-load "mumamo"
+    '(setq mumamo-per-buffer-local-vars
+           (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
+
+; nxhtml:
+;; (load "/Users/matthewwyatt/.emacs.d/vendor/nxhtml/autostart")
+
+;; pymacs/ropemacs stuff:
+(add-to-list 'load-path "~/.emacs.d/vendor/Pymacs")
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+
+(defun load-ropemacs ()
+  "Load pymacs and ropemacs"
+  (interactive)
+  (require 'pymacs)
+  (pymacs-load "ropemacs" "rope-")
+  ;; Automatically save project python buffers before refactorings
+  (setq ropemacs-confirm-saving 'nil))
+
+(global-set-key "\C-xpl" 'load-ropemacs)
+(require 'dash)
+(require 'virtualenvwrapper)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+(venv-initialize-eshell) ;; if you want eshell support
+(setq venv-location "/Users/matthewwyatt/.virtualenvs/")
+
+(add-hook 'python-mode-hook (lambda ()
+                              (hack-local-variables)
+                              (venv-workon project-venv-name)))
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t) 
+;; (setq jedi:setup-keys t)
+(setq python-environment-virtualenv '("/usr/local/bin/virtualenv" "--system-site-packages" "--quiet"))
+
 ;(require 'recentf)
 ;(recentf-mode 1)
 
@@ -154,3 +201,28 @@ by using nxml's indentation rules."
 (add-hook 'python-mode-hook 'turn-off-auto-fill)
 
 (add-hook 'sql-mode-hook 'turn-off-auto-fill)
+
+(add-hook 'js-mode-hook 'turn-off-auto-fill t nil)
+
+(add-hook 'sgml-mode-hook 'turn-off-auto-fill t nil)
+(add-hook 'html-mode-hook 'turn-off-auto-fill t nil)
+
+(define-skeleton bs-dj-tbl
+  "Creates a bootstrap table with Django template stuff"
+  "iterable singular: "
+  "<table class=\"table table-condensed table-bordered\">\n"
+  "  <thead>\n"
+  "  <tr>\n"
+  "    <th>" _ "</th>\n"
+  "  </tr>\n"
+  "  </thead>\n"
+  "  <tbody>\n"
+  "  {% for " str | " foo" " in " str | "foo" "s %}\n"
+  "    <tr>\n"
+  "      <td></td>\n"
+  "    </tr>\n"
+  "  {% endfor %}\n"
+  "  </tbody>\n"
+  "</table>\n")
+
+(global-linum-mode 1)
