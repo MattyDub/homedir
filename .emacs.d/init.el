@@ -1,4 +1,6 @@
 (require 'package)
+;; This is set to nil because when I added el-get, I was getting what
+;; appeared to be chicken-and-egg problems with external dependencies.
 (setq package-load-list '())
 ;; (message "package-load-list here:")
 ;; (princ package-load-list)
